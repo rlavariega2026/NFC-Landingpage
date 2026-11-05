@@ -1,44 +1,24 @@
 name: Deploy NFC Landingpage to Hostinger
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
+
 concurrency:
   group: nfc-landingpage-deploy
   cancel-in-progress: true
+
 jobs:
   deploy:
-    name: Deploy NFC landing page to the live tarjetas-nfc URL
+    name: Publish NFC landing page in tarjetas-nfc
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Repair and verify directory permissions
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_PORT: ${{ secrets.FTP_PORT }}
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" -p "$FTP_PORT" "$FTP_SERVER" -e '
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate no;
-            chmod 755 /domains;
-            chmod 755 /domains/lavdigitalmkt.com;
-            chmod 755 /domains/lavdigitalmkt.com/public_html;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/assets;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/assets/servicios;
-            chmod 644 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/index.html;
-            chmod 644 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/.htaccess;
-            cls -ld /domains /domains/lavdigitalmkt.com /domains/lavdigitalmkt.com/public_html /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
-            cls -l /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
-            bye
-          '
-      - name: Deploy website
+
+      - name: Deploy only to the existing tarjetas-nfc folder
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
