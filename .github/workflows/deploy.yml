@@ -24,7 +24,9 @@ jobs:
           server-dir: /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/
           local-dir: ./
           exclude: |
-            **/.git*
+            **/.git*/**
+            .git/**
             **/.github/**
+            .github/**
             **/README.md
             **/.DS_Store
