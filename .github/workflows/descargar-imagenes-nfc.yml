@@ -1,0 +1,32 @@
+name: Descargar imágenes NFC
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preparar-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar ZIP de imágenes disponibles
+        run: |
+          mkdir -p paquete-nfc
+          cp assets/logo-lav-digital.png paquete-nfc/
+          cp assets/servicios/display-nfc-original.jpg paquete-nfc/
+          cp assets/servicios/hero-dispositivos.jpg paquete-nfc/
+          cp assets/servicios/tarjetas-nfc.jpg paquete-nfc/
+          cd paquete-nfc
+          zip -r ../imagenes-nfc-disponibles.zip .
+
+      - name: Publicar ZIP como artefacto descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: imagenes-nfc-disponibles
+          path: imagenes-nfc-disponibles.zip
+          if-no-files-found: error
+          retention-days: 7
