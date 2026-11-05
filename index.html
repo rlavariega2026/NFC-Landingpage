@@ -83,5 +83,5 @@ body{background:radial-gradient(ellipse at 76% 0%,rgba(76,57,160,.28),transparen
 </main>
 <footer class="footer"><div class="wrap footer-row"><span>© <span id="year"></span> LAV Digital MKT. Todos los derechos reservados.</span><span>Website · Marketing · Graphic Design</span><span class="small">Diseño personalizado y soluciones digitales</span></div></footer>
 <a class="float" href="https://wa.me/527774418793?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20LAV" target="_blank" rel="noopener">WhatsApp</a>
-<script>document.getElementById("year").textContent=new Date().getFullYear();document.querySelectorAll(".sample").forEach(a=>a.addEventListener("click",e=>e.preventDefault()));</script>
+<script>document.getElementById("year").textContent=new Date().getFullYear();document.querySelectorAll(".sample").forEach(a=>{const service=a.dataset.service||a.closest(".service")?.querySelector("h3")?.textContent||"este servicio";a.href="https://wa.me/527774418793?text="+encodeURIComponent("Hola, quiero información y una muestra de "+service+".");a.target="_blank";a.rel="noopener";a.textContent="Solicitar información y muestra →";});</script>
 </body></html>
