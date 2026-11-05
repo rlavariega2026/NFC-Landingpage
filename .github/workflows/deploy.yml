@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           protocol: ftps
-          server-dir: public_html/NFC-Landingpage/
+          server-dir: /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/
           local-dir: ./
           exclude: |
             **/.git*/**
