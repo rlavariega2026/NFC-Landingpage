@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   deploy:
-    name: Repair directory access and deploy
+    name: Deploy NFC landing page to the live tarjetas-nfc URL
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,13 +29,13 @@ jobs:
             chmod 755 /domains;
             chmod 755 /domains/lavdigitalmkt.com;
             chmod 755 /domains/lavdigitalmkt.com/public_html;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/NFC-Landingpage;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/assets;
-            chmod 755 /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/assets/servicios;
-            chmod 644 /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/index.html;
-            chmod 644 /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/.htaccess;
-            cls -ld /domains /domains/lavdigitalmkt.com /domains/lavdigitalmkt.com/public_html /domains/lavdigitalmkt.com/public_html/NFC-Landingpage;
-            cls -l /domains/lavdigitalmkt.com/public_html/NFC-Landingpage;
+            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
+            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/assets;
+            chmod 755 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/assets/servicios;
+            chmod 644 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/index.html;
+            chmod 644 /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/.htaccess;
+            cls -ld /domains /domains/lavdigitalmkt.com /domains/lavdigitalmkt.com/public_html /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
+            cls -l /domains/lavdigitalmkt.com/public_html/tarjetas-nfc;
             bye
           '
       - name: Deploy website
@@ -46,7 +46,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           protocol: ftps
-          server-dir: /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/
+          server-dir: /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/
           local-dir: ./
           exclude: |
             **/.git*/**
