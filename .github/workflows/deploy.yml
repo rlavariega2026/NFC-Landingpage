@@ -12,13 +12,13 @@ concurrency:
 
 jobs:
   deploy:
-    name: Publish NFC landing page in tarjetas-nfc
+    name: Publish NFC landing page in NFC-Landingpage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy only to the existing tarjetas-nfc folder
+      - name: Deploy repository contents to public NFC-Landingpage folder
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           protocol: ftps
-          server-dir: /domains/lavdigitalmkt.com/public_html/tarjetas-nfc/
+          server-dir: /domains/lavdigitalmkt.com/public_html/NFC-Landingpage/
           local-dir: ./
           exclude: |
             **/.git*/**
